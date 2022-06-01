@@ -1,0 +1,65 @@
+#get all the  posts by author 1
+SELECT title, body, date, user_id
+FROM posts
+WHERE user_id = 1
+	AND is_published = 1
+
+
+#get all the approved comments on post 2
+SELECT body, date
+FROM comments
+WHERE is_approved = 1
+AND post_id = 2
+
+
+#show 10 posts
+SELECT *
+FROM posts
+LIMIT 10
+
+# add a comment
+INSERT INTO comments
+(user_id, body, post_id, date, is_approved)
+VALUES
+(1, 'this is the body of the comment', 2, now(), 0 ),
+(1, 'this is the body of the other comment', 2, now(), 0 ),
+(1, 'this is the body of the third comment', 2, now(), 0 ),
+(1, 'this is the body of the fourth and final comment', 2, now(), 0 )
+
+#add a new basic user
+INSERT INTO users
+( username, password, email, is_admin, join_date )
+VALUES
+( 'morgananneken', 'password', 'numbers@mail.com', 0, now() )
+
+
+#add 4 categories
+INSERT INTO categories
+(name)
+VALUES
+('Movies'),
+('TV'),
+('Games'),
+('Travel')
+
+
+#edit user 2's email address and bio
+UPDATE users
+SET email = 'newemail@mail.com', bio = 'This is my new bio'
+WHERE user_id = 2
+
+ORDER BY and LIMIT
+ORDER BY name ASC			//Name A-Z
+ORDER BY title DESC	   //Title Z-A
+ORDER BY date DESC      //most recent date first
+ORDER BY RAND()		      //Random order
+
+LIMIT 10						//maximum 10 records
+LIMIT 1						//maximum 1 record
+
+#get the most recent 20 published posts
+SELECT *
+FROM posts
+WHERE is_published = 1
+ORDER BY date DESC
+LIMIT 20
